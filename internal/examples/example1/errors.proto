@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package example;
 
-import "internal/codegen/errors/errors.proto";
+import "errors/errors.proto";
 
 option go_package = "github.com/orzkratos/errgenkratos/internal/examples/example1;example1";
 

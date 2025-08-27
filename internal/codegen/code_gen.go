@@ -5,7 +5,7 @@ import (
 	"strings"
 	"unicode"
 
-	"github.com/orzkratos/errgenkratos/internal/codegen/errors"
+	"github.com/go-kratos/kratos/v2/errors"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 	"google.golang.org/protobuf/compiler/protogen"

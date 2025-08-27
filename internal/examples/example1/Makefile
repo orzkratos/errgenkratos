@@ -4,6 +4,7 @@ PROTO_FILES=$(shell find . -name *.proto)
 generate:
 	protoc --proto_path=. \
 	       --proto_path=../../.. \
+	       --proto_path=../../proto3ps \
 	       --go_out=paths=source_relative:. \
 	       --orzkratos-errors_out=paths=source_relative:. \
 	       $(PROTO_FILES)
