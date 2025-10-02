@@ -4,7 +4,7 @@
 // 	protoc        v6.32.1
 // source: errors.proto
 
-package example1
+package example3
 
 import (
 	_ "github.com/go-kratos/kratos/v2/errors"
@@ -22,28 +22,34 @@ const (
 	_ = protoimpl.EnforceVersion(protoimpl.MaxVersion - 20)
 )
 
+// Global error codes for common issues
+// 全局错误码，用于通用问题
 type ErrorReason int32
 
 const (
 	// Unknown error
 	ErrorReason_UNKNOWN ErrorReason = 0
-	// User not found
-	ErrorReason_USER_NOT_FOUND ErrorReason = 1
-	// Invalid parameter
-	ErrorReason_INVALID_PARAMETER ErrorReason = 2
+	// Internal server error
+	ErrorReason_INTERNAL_ERROR ErrorReason = 1
+	// Service unavailable
+	ErrorReason_SERVICE_UNAVAILABLE ErrorReason = 2
+	// Request timeout
+	ErrorReason_REQUEST_TIMEOUT ErrorReason = 3
 )
 
 // Enum value maps for ErrorReason.
 var (
 	ErrorReason_name = map[int32]string{
 		0: "UNKNOWN",
-		1: "USER_NOT_FOUND",
-		2: "INVALID_PARAMETER",
+		1: "INTERNAL_ERROR",
+		2: "SERVICE_UNAVAILABLE",
+		3: "REQUEST_TIMEOUT",
 	}
 	ErrorReason_value = map[string]int32{
-		"UNKNOWN":           0,
-		"USER_NOT_FOUND":    1,
-		"INVALID_PARAMETER": 2,
+		"UNKNOWN":             0,
+		"INTERNAL_ERROR":      1,
+		"SERVICE_UNAVAILABLE": 2,
+		"REQUEST_TIMEOUT":     3,
 	}
 )
 
@@ -78,11 +84,12 @@ var File_errors_proto protoreflect.FileDescriptor
 
 const file_errors_proto_rawDesc = "" +
 	"\n" +
-	"\ferrors.proto\x12\aexample\x1a\x13errors/errors.proto*W\n" +
-	"\vErrorReason\x12\v\n" +
-	"\aUNKNOWN\x10\x00\x12\x18\n" +
-	"\x0eUSER_NOT_FOUND\x10\x01\x1a\x04\xa8E\x94\x03\x12\x1b\n" +
-	"\x11INVALID_PARAMETER\x10\x02\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BGZEgithub.com/orzkratos/errgenkratos/internal/examples/example1;example1b\x06proto3"
+	"\ferrors.proto\x12\bexample3\x1a\x13errors/errors.proto*z\n" +
+	"\vErrorReason\x12\x11\n" +
+	"\aUNKNOWN\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x18\n" +
+	"\x0eINTERNAL_ERROR\x10\x01\x1a\x04\xa8E\xf4\x03\x12\x1d\n" +
+	"\x13SERVICE_UNAVAILABLE\x10\x02\x1a\x04\xa8E\xf7\x03\x12\x19\n" +
+	"\x0fREQUEST_TIMEOUT\x10\x03\x1a\x04\xa8E\x98\x03\x1a\x04\xa0E\xf4\x03BGZEgithub.com/orzkratos/errgenkratos/internal/examples/example3;example3b\x06proto3"
 
 var (
 	file_errors_proto_rawDescOnce sync.Once
@@ -98,7 +105,7 @@ func file_errors_proto_rawDescGZIP() []byte {
 
 var file_errors_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
 var file_errors_proto_goTypes = []any{
-	(ErrorReason)(0), // 0: example.ErrorReason
+	(ErrorReason)(0), // 0: example3.ErrorReason
 }
 var file_errors_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

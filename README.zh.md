@@ -1,18 +1,30 @@
+[![GitHub Workflow Status (branch)](https://img.shields.io/github/actions/workflow/status/orzkratos/errgenkratos/release.yml?branch=main&label=BUILD)](https://github.com/orzkratos/errgenkratos/actions/workflows/release.yml?query=branch%3Amain)
+[![GoDoc](https://pkg.go.dev/badge/github.com/orzkratos/errgenkratos)](https://pkg.go.dev/github.com/orzkratos/errgenkratos)
+[![Coverage Status](https://img.shields.io/coveralls/github/orzkratos/errgenkratos/main.svg)](https://coveralls.io/github/orzkratos/errgenkratos?branch=main)
+[![Supported Go Versions](https://img.shields.io/badge/Go-1.25+-lightgrey.svg)](https://go.dev/)
+[![GitHub Release](https://img.shields.io/github/release/orzkratos/errgenkratos.svg)](https://github.com/orzkratos/errgenkratos/releases)
+[![Go Report Card](https://goreportcard.com/badge/github.com/orzkratos/errgenkratos)](https://goreportcard.com/report/github.com/orzkratos/errgenkratos)
+
 # errgenkratos
 
-Kratos 错误处理代码生成插件，减少样板代码并支持自定义字段扩展。
+Kratos 错误处理代码生成插件，减少样板代码并支持嵌套枚举和自定义字段扩展。
 
+---
+
+<!-- TEMPLATE (ZH) BEGIN: LANGUAGE NAVIGATION -->
 ## 英文文档
 
 [ENGLISH README](README.md)
+<!-- TEMPLATE (ZH) END: LANGUAGE NAVIGATION -->
 
 ## 核心特性
 
-- 🚀 **简洁代码生成**: 使用泛型函数减少重复代码
-- 🎯 **单行函数体**: 每个生成的函数体内仅有一行代码
-- 🔧 **可配置元数据**: 支持添加包含枚举值的自定义元数据字段
-- 📦 **简单集成**: 完全兼容 protoc-gen-go-errors 的替代方案
-- ⚡ **高性能**: 编译时泛型实现最小运行时开销
+🚀 **简洁代码生成**: 使用泛型函数减少重复代码
+🎯 **单行函数体**: 每个生成的函数体内仅有一行代码
+🔧 **可配置元数据**: 支持添加包含枚举值的自定义元数据字段
+📦 **简单集成**: 完全兼容 protoc-gen-go-errors 的替代方案
+⚡ **高性能**: 编译时泛型实现最小运行时开销
+🔄 **嵌套枚举支持**: 从消息体内部枚举生成错误代码
 
 ## 安装
 
@@ -21,25 +33,54 @@ Kratos 错误处理代码生成插件，减少样板代码并支持自定义字�
 go install github.com/orzkratos/errgenkratos/cmd/protoc-gen-orzkratos-errors@latest
 ```
 
-## 使用方法
+## 基本使用
 
+### 标准生成（仅顶级枚举）
 ```bash
 protoc --orzkratos-errors_out=paths=source_relative:./your_output_dir your_proto_files.proto
 ```
 
-### 生成代码示例
+### 开启嵌套枚举支持
+```bash
+protoc --orzkratos-errors_out=include_nested=true,paths=source_relative:./your_output_dir your_proto_files.proto
+```
 
+## 示例
+
+查看 [examples](internal/examples/) DIR 了解详细用法：
+- [example1](internal/examples/example1/) - 基础顶级枚举错误生成
+- [example2](internal/examples/example2/) - 单文件嵌套枚举支持
+- [example3](internal/examples/example3/) - 多文件项目与服务定义
+
+## 生成代码示例
+
+### 顶级枚举（标准）
 ```go
-// 由 protoc-gen-orzkratos-errors 生成
+// 生成自：enum ErrorReason { USER_NOT_FOUND = 1 [(errors.code) = 404]; }
 
 // 用户未找到
 func IsUserNotFound(err error) bool {
     return errgenkratos.IsError(err, ErrorReason_USER_NOT_FOUND, 404)
 }
 
-// 用户未找到  
+// 用户未找到
 func ErrorUserNotFound(format string, args ...interface{}) *errors.Error {
     return errgenkratos.NewError(404, ErrorReason_USER_NOT_FOUND, format, args...)
+}
+```
+
+### 嵌套枚举（新特性）
+```go
+// 生成自：message GetUserResponse { enum ErrorReason { USER_NOT_FOUND = 1 [(errors.code) = 404]; } }
+
+// 用户未找到
+func IsGetUserResponseUserNotFound(err error) bool {
+    return errgenkratos.IsError(err, GetUserResponse_USER_NOT_FOUND, 404)
+}
+
+// 用户未找到
+func ErrorGetUserResponseUserNotFound(format string, args ...interface{}) *errors.Error {
+    return errgenkratos.NewError(404, GetUserResponse_USER_NOT_FOUND, format, args...)
 }
 ```
 
@@ -65,6 +106,7 @@ func init() {
 ---
 
 <!-- TEMPLATE (ZH) BEGIN: STANDARD PROJECT FOOTER -->
+<!-- VERSION 2025-09-26 07:39:27.188023 +0000 UTC -->
 
 ## 📄 许可证类型
 
@@ -119,7 +161,7 @@ MIT 许可证。详见 [LICENSE](LICENSE)。
 - 📝 **撰写博客**关于开发工具和工作流程 - 我们提供写作支持
 - 🌟 **加入生态** - 致力于支持开源和（golang）开发场景
 
-**使用这个包快乐编程！** 🎉
+**祝你用这个包编程愉快！** 🎉🎉🎉
 
 <!-- TEMPLATE (ZH) END: STANDARD PROJECT FOOTER -->
 

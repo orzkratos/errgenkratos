@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package example3;
+
+import "errors/errors.proto";
+
+option go_package = "github.com/orzkratos/errgenkratos/internal/examples/example3;example3";
+
+// Global error codes for common issues
+// 全局错误码，用于通用问题
+enum ErrorReason {
+  option (errors.default_code) = 500;
+
+  // Unknown error
+  UNKNOWN = 0 [(errors.code) = 500];
+  // Internal server error
+  INTERNAL_ERROR = 1 [(errors.code) = 500];
+  // Service unavailable
+  SERVICE_UNAVAILABLE = 2 [(errors.code) = 503];
+  // Request timeout
+  REQUEST_TIMEOUT = 3 [(errors.code) = 408];
+}

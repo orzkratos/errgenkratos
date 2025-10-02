@@ -8,12 +8,11 @@ install:
 .PHONY: generate
 generate:
 	protoc --proto_path=. \
-	       --proto_path=../../.. \
 	       --proto_path=../../proto3ps \
 	       --go_out=paths=source_relative:. \
-	       --orzkratos-errors_out=paths=source_relative:. \
+	       --orzkratos-errors_out=include_nested=true,paths=source_relative:. \
 	       $(PROTO_FILES)
-	@echo "错误代码生成完成（仅顶级枚举）!"
+	@echo "错误代码生成完成（多文件，包含顶级和嵌套枚举）!"
 
 .PHONY: clean
 clean:
@@ -24,6 +23,6 @@ clean:
 help:
 	@echo "Available targets:"
 	@echo "  install  - Install protoc-gen-orzkratos-errors plugin"
-	@echo "  generate - Generate Go code from proto files"
+	@echo "  generate - Generate Go code from proto files (include nested enums)"
 	@echo "  clean    - Remove generated .pb.go files"
 	@echo "  help     - Show this help message"

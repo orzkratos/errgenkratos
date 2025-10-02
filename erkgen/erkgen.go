@@ -14,6 +14,7 @@ import (
 // Config 保存生成配置
 type Config struct {
 	GeneratorName string // Generator name for comments // 注释中的生成器名称
+	IncludeNested bool   // Include nested enums in generation // 是否包含嵌套枚举
 }
 
 // GenerateFile generates a _errors.pb.go file containing kratos errors definitions
@@ -24,5 +25,6 @@ type Config struct {
 func GenerateFile(gen *protogen.Plugin, file *protogen.File, config Config) *protogen.GeneratedFile {
 	return codegen.GenerateFile(gen, file, codegen.Config{
 		GeneratorName: config.GeneratorName,
+		IncludeNested: config.IncludeNested,
 	})
 }

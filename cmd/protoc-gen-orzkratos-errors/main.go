@@ -9,7 +9,10 @@ import (
 	"google.golang.org/protobuf/types/pluginpb"
 )
 
-var showVersion = flag.Bool("version", false, "print the version and exit")
+var (
+	showVersion   = flag.Bool("version", false, "print the version then exit")
+	includeNested = flag.Bool("include_nested", false, "include nested enums")
+)
 
 func main() {
 	flag.Parse()
@@ -28,6 +31,7 @@ func main() {
 			}
 			erkgen.GenerateFile(gen, f, erkgen.Config{
 				GeneratorName: "protoc-gen-orzkratos-errors (errgenkratos)",
+				IncludeNested: *includeNested,
 			})
 		}
 		return nil
