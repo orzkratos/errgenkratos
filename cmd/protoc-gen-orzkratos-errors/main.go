@@ -10,8 +10,7 @@ import (
 )
 
 var (
-	showVersion   = flag.Bool("version", false, "print the version then exit")
-	includeNested = flag.Bool("include_nested", false, "include nested enums")
+	showVersion = flag.Bool("version", false, "print the version then exit")
 )
 
 func main() {
@@ -21,6 +20,7 @@ func main() {
 		return
 	}
 	var flags flag.FlagSet
+	includeNested := flags.Bool("include_nested", false, "include nested enums")
 	protogen.Options{
 		ParamFunc: flags.Set,
 	}.Run(func(gen *protogen.Plugin) error {
