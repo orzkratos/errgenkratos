@@ -3,6 +3,7 @@ package main
 import (
 	"flag"
 	"fmt"
+	"runtime/debug"
 
 	"github.com/orzkratos/errgenkratos/erkgen"
 	"google.golang.org/protobuf/compiler/protogen"
@@ -14,7 +15,11 @@ var showVersion = flag.Bool("version", false, "print the version and exit")
 func main() {
 	flag.Parse()
 	if *showVersion {
-		fmt.Printf("protoc-gen-orzkratos-errors %v\n", release)
+		if info, ok := debug.ReadBuildInfo(); ok {
+			fmt.Printf("protoc-gen-orzkratos-errors %v (module: %s) (target: %s)\n", release, info.Main.Path, info.Path)
+		} else {
+			fmt.Printf("protoc-gen-orzkratos-errors %v\n", release)
+		}
 		return
 	}
 	var flags flag.FlagSet
