@@ -35,7 +35,7 @@ go install github.com/orzkratos/errgenkratos/cmd/protoc-gen-orzkratos-errors@lat
 
 ## 基本使用
 
-### 标准生成（仅顶级枚举）
+### 标准生成（顶层枚举）
 ```bash
 protoc --orzkratos-errors_out=paths=source_relative:./your_output_dir your_proto_files.proto
 ```
@@ -45,12 +45,18 @@ protoc --orzkratos-errors_out=paths=source_relative:./your_output_dir your_proto
 protoc --orzkratos-errors_out=include_nested=true,paths=source_relative:./your_output_dir your_proto_files.proto
 ```
 
+### 使用下划线命名
+```bash
+protoc --orzkratos-errors_out=include_nested=true,separate_named=true,paths=source_relative:./your_output_dir your_proto_files.proto
+```
+
 ## 示例
 
 查看 [examples](internal/examples/) DIR 了解详细用法：
 - [example1](internal/examples/example1/) - 基础顶级枚举错误生成
 - [example2](internal/examples/example2/) - 单文件嵌套枚举支持
 - [example3](internal/examples/example3/) - 多文件项目与服务定义
+- [example4](internal/examples/example4/) - 嵌套枚举使用下划线分隔符
 
 ## 生成代码示例
 
@@ -81,6 +87,21 @@ func IsGetUserResponseUserNotFound(err error) bool {
 // 用户未找到
 func ErrorGetUserResponseUserNotFound(format string, args ...interface{}) *errors.Error {
     return errgenkratos.NewError(404, GetUserResponse_USER_NOT_FOUND, format, args...)
+}
+```
+
+### 嵌套枚举（使用下划线分隔符）
+```go
+// 生成自：message GetOrderResponse { enum ErrorCode { ORDER_NOT_FOUND = 1 [(errors.code) = 404]; } }
+
+// 订单未找到
+func IsGetOrderResponse_OrderNotFound(err error) bool {
+    return errgenkratos.IsError(err, GetOrderResponse_ORDER_NOT_FOUND, 404)
+}
+
+// 订单未找到
+func ErrorGetOrderResponse_OrderNotFound(format string, args ...interface{}) *errors.Error {
+    return errgenkratos.NewError(404, GetOrderResponse_ORDER_NOT_FOUND, format, args...)
 }
 ```
 

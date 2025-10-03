@@ -78,9 +78,9 @@ var File_errors_proto protoreflect.FileDescriptor
 
 const file_errors_proto_rawDesc = "" +
 	"\n" +
-	"\ferrors.proto\x12\aexample\x1a\x13errors/errors.proto*W\n" +
-	"\vErrorReason\x12\v\n" +
-	"\aUNKNOWN\x10\x00\x12\x18\n" +
+	"\ferrors.proto\x12\aexample\x1a\x13errors/errors.proto*]\n" +
+	"\vErrorReason\x12\x11\n" +
+	"\aUNKNOWN\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x18\n" +
 	"\x0eUSER_NOT_FOUND\x10\x01\x1a\x04\xa8E\x94\x03\x12\x1b\n" +
 	"\x11INVALID_PARAMETER\x10\x02\x1a\x04\xa8E\x90\x03\x1a\x04\xa0E\xf4\x03BGZEgithub.com/orzkratos/errgenkratos/internal/examples/example1;example1b\x06proto3"
 

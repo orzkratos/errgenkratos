@@ -46,7 +46,7 @@ message GetUserResponse {
 
   // GetUser-specific error codes
   // GetUser特定错误码
-  enum ErrorReason {
+  enum ErrorCode {
     // Unknown error
     UNKNOWN = 0 [(errors.code) = 500];
     // User not found

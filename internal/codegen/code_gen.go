@@ -23,6 +23,7 @@ var enCases = cases.Title(language.AmericanEnglish, cases.NoLower)
 type Config struct {
 	GeneratorName string // e.g. "protoc-gen-go-errors" or "protoc-gen-orzkratos-errors"
 	IncludeNested bool   // Include nested enums in generation
+	SeparateNamed bool   // Use underscore separator in nested enum function names (e.g. ErrorGetUserResponse_UserNotFound)
 }
 
 // GenerateFile generates a _errors.pb.go file containing kratos errors definitions
@@ -70,12 +71,12 @@ func GenerateFile(gen *protogen.Plugin, file *protogen.File, config Config) *pro
 
 	// Generate error handling functions for collected enums
 	// 为收集到的枚举生成错误处理函数
-	generateFileContent(gen, file, g, enums)
+	generateFileContent(gen, file, g, enums, config)
 	return g
 }
 
 // generateFileContent generates the kratos errors definitions, excluding the package statement.
-func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile, enums []*protogen.Enum) {
+func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.GeneratedFile, enums []*protogen.Enum, config Config) {
 	if len(enums) == 0 {
 		return
 	}
@@ -86,7 +87,7 @@ func generateFileContent(gen *protogen.Plugin, file *protogen.File, g *protogen.
 	g.P()
 	index := 0
 	for _, enum := range enums {
-		if !genErrorsReason(gen, file, g, enum) {
+		if !genErrorsReason(gen, file, g, enum, config) {
 			index++
 		}
 	}
@@ -114,7 +115,7 @@ func collectMessageEnums(message *protogen.Message) []*protogen.Enum {
 	return enums
 }
 
-func genErrorsReason(_ *protogen.Plugin, _ *protogen.File, g *protogen.GeneratedFile, enum *protogen.Enum) bool {
+func genErrorsReason(_ *protogen.Plugin, _ *protogen.File, g *protogen.GeneratedFile, enum *protogen.Enum, config Config) bool {
 	defaultCode := proto.GetExtension(enum.Desc.Options(), errors.E_DefaultCode)
 	code := 0
 	if ok := defaultCode.(int32); ok != 0 {
@@ -147,7 +148,11 @@ func genErrorsReason(_ *protogen.Plugin, _ *protogen.File, g *protogen.Generated
 		name, value, camelValue := string(enum.Desc.Name()), string(v.Desc.Name()), case2Camel(string(v.Desc.Name()))
 		if parent := enum.Desc.Parent(); parent != nil && parent.Parent() != nil {
 			name, value = "", string(parent.Name())+"_"+string(v.Desc.Name())
-			camelValue = case2Camel(string(parent.Name())) + case2Camel(string(v.Desc.Name()))
+			if config.SeparateNamed {
+				camelValue = case2Camel(string(parent.Name())) + "_" + case2Camel(string(v.Desc.Name()))
+			} else {
+				camelValue = case2Camel(string(parent.Name())) + case2Camel(string(v.Desc.Name()))
+			}
 		}
 
 		err := &errorInfo{

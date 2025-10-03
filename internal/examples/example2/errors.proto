@@ -26,7 +26,7 @@ message GetInfoResp {
   string nickname = 2;
 
   // Nested error enum
-  enum ErrorReason {
+  enum ErrorCode {
     option (errors.default_code) = 500;
 
     // Unknown error

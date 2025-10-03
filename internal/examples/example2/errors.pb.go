@@ -76,28 +76,28 @@ func (ErrorReason) EnumDescriptor() ([]byte, []int) {
 }
 
 // Nested error enum
-type GetInfoResp_ErrorReason int32
+type GetInfoResp_ErrorCode int32
 
 const (
 	// Unknown error
-	GetInfoResp_UNKNOWN GetInfoResp_ErrorReason = 0
+	GetInfoResp_UNKNOWN GetInfoResp_ErrorCode = 0
 	// User not found
-	GetInfoResp_USER_NOT_FOUND GetInfoResp_ErrorReason = 1
+	GetInfoResp_USER_NOT_FOUND GetInfoResp_ErrorCode = 1
 	// User already exists
-	GetInfoResp_USER_ALREADY_EXISTS GetInfoResp_ErrorReason = 2
+	GetInfoResp_USER_ALREADY_EXISTS GetInfoResp_ErrorCode = 2
 	// Invalid user data
-	GetInfoResp_INVALID_USER_DATA GetInfoResp_ErrorReason = 3
+	GetInfoResp_INVALID_USER_DATA GetInfoResp_ErrorCode = 3
 )
 
-// Enum value maps for GetInfoResp_ErrorReason.
+// Enum value maps for GetInfoResp_ErrorCode.
 var (
-	GetInfoResp_ErrorReason_name = map[int32]string{
+	GetInfoResp_ErrorCode_name = map[int32]string{
 		0: "UNKNOWN",
 		1: "USER_NOT_FOUND",
 		2: "USER_ALREADY_EXISTS",
 		3: "INVALID_USER_DATA",
 	}
-	GetInfoResp_ErrorReason_value = map[string]int32{
+	GetInfoResp_ErrorCode_value = map[string]int32{
 		"UNKNOWN":             0,
 		"USER_NOT_FOUND":      1,
 		"USER_ALREADY_EXISTS": 2,
@@ -105,30 +105,30 @@ var (
 	}
 )
 
-func (x GetInfoResp_ErrorReason) Enum() *GetInfoResp_ErrorReason {
-	p := new(GetInfoResp_ErrorReason)
+func (x GetInfoResp_ErrorCode) Enum() *GetInfoResp_ErrorCode {
+	p := new(GetInfoResp_ErrorCode)
 	*p = x
 	return p
 }
 
-func (x GetInfoResp_ErrorReason) String() string {
+func (x GetInfoResp_ErrorCode) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (GetInfoResp_ErrorReason) Descriptor() protoreflect.EnumDescriptor {
+func (GetInfoResp_ErrorCode) Descriptor() protoreflect.EnumDescriptor {
 	return file_errors_proto_enumTypes[1].Descriptor()
 }
 
-func (GetInfoResp_ErrorReason) Type() protoreflect.EnumType {
+func (GetInfoResp_ErrorCode) Type() protoreflect.EnumType {
 	return &file_errors_proto_enumTypes[1]
 }
 
-func (x GetInfoResp_ErrorReason) Number() protoreflect.EnumNumber {
+func (x GetInfoResp_ErrorCode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetInfoResp_ErrorReason.Descriptor instead.
-func (GetInfoResp_ErrorReason) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use GetInfoResp_ErrorCode.Descriptor instead.
+func (GetInfoResp_ErrorCode) EnumDescriptor() ([]byte, []int) {
 	return file_errors_proto_rawDescGZIP(), []int{0, 0}
 }
 
@@ -189,11 +189,11 @@ var File_errors_proto protoreflect.FileDescriptor
 
 const file_errors_proto_rawDesc = "" +
 	"\n" +
-	"\ferrors.proto\x12\aexample\x1a\x13errors/errors.proto\"\xc3\x01\n" +
+	"\ferrors.proto\x12\aexample\x1a\x13errors/errors.proto\"\xc1\x01\n" +
 	"\vGetInfoResp\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
-	"\bnickname\x18\x02 \x01(\tR\bnickname\"|\n" +
-	"\vErrorReason\x12\x11\n" +
+	"\bnickname\x18\x02 \x01(\tR\bnickname\"z\n" +
+	"\tErrorCode\x12\x11\n" +
 	"\aUNKNOWN\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x18\n" +
 	"\x0eUSER_NOT_FOUND\x10\x01\x1a\x04\xa8E\x94\x03\x12\x1d\n" +
 	"\x13USER_ALREADY_EXISTS\x10\x02\x1a\x04\xa8E\x99\x03\x12\x1b\n" +
@@ -218,9 +218,9 @@ func file_errors_proto_rawDescGZIP() []byte {
 var file_errors_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_errors_proto_msgTypes = make([]protoimpl.MessageInfo, 1)
 var file_errors_proto_goTypes = []any{
-	(ErrorReason)(0),             // 0: example.ErrorReason
-	(GetInfoResp_ErrorReason)(0), // 1: example.GetInfoResp.ErrorReason
-	(*GetInfoResp)(nil),          // 2: example.GetInfoResp
+	(ErrorReason)(0),           // 0: example.ErrorReason
+	(GetInfoResp_ErrorCode)(0), // 1: example.GetInfoResp.ErrorCode
+	(*GetInfoResp)(nil),        // 2: example.GetInfoResp
 }
 var file_errors_proto_depIdxs = []int32{
 	0, // [0:0] is the sub-list for method output_type

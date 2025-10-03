@@ -35,7 +35,7 @@ go install github.com/orzkratos/errgenkratos/cmd/protoc-gen-orzkratos-errors@lat
 
 ## Basic Usage
 
-### Standard Generation (Top-level Enums Only)
+### Standard Generation (Top Enums)
 ```bash
 protoc --orzkratos-errors_out=paths=source_relative:./your_output_dir your_proto_files.proto
 ```
@@ -45,12 +45,18 @@ protoc --orzkratos-errors_out=paths=source_relative:./your_output_dir your_proto
 protoc --orzkratos-errors_out=include_nested=true,paths=source_relative:./your_output_dir your_proto_files.proto
 ```
 
+### With Underscore Naming
+```bash
+protoc --orzkratos-errors_out=include_nested=true,separate_named=true,paths=source_relative:./your_output_dir your_proto_files.proto
+```
+
 ## Examples
 
 Check out the [examples](internal/examples/) DIR for detailed use cases:
 - [example1](internal/examples/example1/) - Basic top-level enum error generation
 - [example2](internal/examples/example2/) - Single file with nested enum support
 - [example3](internal/examples/example3/) - Multi-file project with service definitions
+- [example4](internal/examples/example4/) - Nested enum using underscore_names
 
 ## Generated Code Examples
 

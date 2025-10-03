@@ -82,28 +82,28 @@ func (GetUserResponse_UserStatus) EnumDescriptor() ([]byte, []int) {
 
 // GetUser-specific error codes
 // GetUser特定错误码
-type GetUserResponse_ErrorReason int32
+type GetUserResponse_ErrorCode int32
 
 const (
 	// Unknown error
-	GetUserResponse_UNKNOWN GetUserResponse_ErrorReason = 0
+	GetUserResponse_UNKNOWN GetUserResponse_ErrorCode = 0
 	// User not found
-	GetUserResponse_USER_NOT_FOUND GetUserResponse_ErrorReason = 1
+	GetUserResponse_USER_NOT_FOUND GetUserResponse_ErrorCode = 1
 	// Access denied
-	GetUserResponse_ACCESS_DENIED GetUserResponse_ErrorReason = 2
+	GetUserResponse_ACCESS_DENIED GetUserResponse_ErrorCode = 2
 	// Invalid username
-	GetUserResponse_INVALID_USER_ID GetUserResponse_ErrorReason = 3
+	GetUserResponse_INVALID_USER_ID GetUserResponse_ErrorCode = 3
 )
 
-// Enum value maps for GetUserResponse_ErrorReason.
+// Enum value maps for GetUserResponse_ErrorCode.
 var (
-	GetUserResponse_ErrorReason_name = map[int32]string{
+	GetUserResponse_ErrorCode_name = map[int32]string{
 		0: "UNKNOWN",
 		1: "USER_NOT_FOUND",
 		2: "ACCESS_DENIED",
 		3: "INVALID_USER_ID",
 	}
-	GetUserResponse_ErrorReason_value = map[string]int32{
+	GetUserResponse_ErrorCode_value = map[string]int32{
 		"UNKNOWN":         0,
 		"USER_NOT_FOUND":  1,
 		"ACCESS_DENIED":   2,
@@ -111,30 +111,30 @@ var (
 	}
 )
 
-func (x GetUserResponse_ErrorReason) Enum() *GetUserResponse_ErrorReason {
-	p := new(GetUserResponse_ErrorReason)
+func (x GetUserResponse_ErrorCode) Enum() *GetUserResponse_ErrorCode {
+	p := new(GetUserResponse_ErrorCode)
 	*p = x
 	return p
 }
 
-func (x GetUserResponse_ErrorReason) String() string {
+func (x GetUserResponse_ErrorCode) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (GetUserResponse_ErrorReason) Descriptor() protoreflect.EnumDescriptor {
+func (GetUserResponse_ErrorCode) Descriptor() protoreflect.EnumDescriptor {
 	return file_user_service_proto_enumTypes[1].Descriptor()
 }
 
-func (GetUserResponse_ErrorReason) Type() protoreflect.EnumType {
+func (GetUserResponse_ErrorCode) Type() protoreflect.EnumType {
 	return &file_user_service_proto_enumTypes[1]
 }
 
-func (x GetUserResponse_ErrorReason) Number() protoreflect.EnumNumber {
+func (x GetUserResponse_ErrorCode) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use GetUserResponse_ErrorReason.Descriptor instead.
-func (GetUserResponse_ErrorReason) EnumDescriptor() ([]byte, []int) {
+// Deprecated: Use GetUserResponse_ErrorCode.Descriptor instead.
+func (GetUserResponse_ErrorCode) EnumDescriptor() ([]byte, []int) {
 	return file_user_service_proto_rawDescGZIP(), []int{1, 1}
 }
 
@@ -256,7 +256,7 @@ const file_user_service_proto_rawDesc = "" +
 	"\n" +
 	"\x12user_service.proto\x12\bexample3\x1a\x13errors/errors.proto\",\n" +
 	"\x0eGetUserRequest\x12\x1a\n" +
-	"\busername\x18\x01 \x01(\x03R\busername\"\xc2\x02\n" +
+	"\busername\x18\x01 \x01(\x03R\busername\"\xc0\x02\n" +
 	"\x0fGetUserResponse\x12\x1a\n" +
 	"\busername\x18\x01 \x01(\tR\busername\x12\x1a\n" +
 	"\bnickname\x18\x02 \x01(\tR\bnickname\x12<\n" +
@@ -267,8 +267,8 @@ const file_user_service_proto_rawDesc = "" +
 	"\n" +
 	"\x06ACTIVE\x10\x01\x12\f\n" +
 	"\bINACTIVE\x10\x02\x12\r\n" +
-	"\tSUSPENDED\x10\x03\"n\n" +
-	"\vErrorReason\x12\x11\n" +
+	"\tSUSPENDED\x10\x03\"l\n" +
+	"\tErrorCode\x12\x11\n" +
 	"\aUNKNOWN\x10\x00\x1a\x04\xa8E\xf4\x03\x12\x18\n" +
 	"\x0eUSER_NOT_FOUND\x10\x01\x1a\x04\xa8E\x94\x03\x12\x17\n" +
 	"\rACCESS_DENIED\x10\x02\x1a\x04\xa8E\x93\x03\x12\x19\n" +
@@ -291,10 +291,10 @@ func file_user_service_proto_rawDescGZIP() []byte {
 var file_user_service_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_user_service_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
 var file_user_service_proto_goTypes = []any{
-	(GetUserResponse_UserStatus)(0),  // 0: example3.GetUserResponse.UserStatus
-	(GetUserResponse_ErrorReason)(0), // 1: example3.GetUserResponse.ErrorReason
-	(*GetUserRequest)(nil),           // 2: example3.GetUserRequest
-	(*GetUserResponse)(nil),          // 3: example3.GetUserResponse
+	(GetUserResponse_UserStatus)(0), // 0: example3.GetUserResponse.UserStatus
+	(GetUserResponse_ErrorCode)(0),  // 1: example3.GetUserResponse.ErrorCode
+	(*GetUserRequest)(nil),          // 2: example3.GetUserRequest
+	(*GetUserResponse)(nil),         // 3: example3.GetUserResponse
 }
 var file_user_service_proto_depIdxs = []int32{
 	0, // 0: example3.GetUserResponse.status:type_name -> example3.GetUserResponse.UserStatus

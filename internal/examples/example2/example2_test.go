@@ -8,27 +8,27 @@ import (
 
 func TestNestedEnums(t *testing.T) {
 	// Test nested enum in message
-	err := ErrorGetInfoRespUserNotFound("user not found")
-	require.True(t, IsGetInfoRespUserNotFound(err))
-	t.Log(err)
+	erk := ErrorGetInfoRespUserNotFound("user not found")
+	require.True(t, IsGetInfoRespUserNotFound(erk))
+	t.Log(erk)
 }
 
 func TestTopLevelEnums(t *testing.T) {
 	// Test top-level enum
-	err := ErrorUnknown("unknown error")
-	require.True(t, IsUnknown(err))
-	t.Log(err)
+	erk := ErrorUnknown("unknown error")
+	require.True(t, IsUnknown(erk))
+	t.Log(erk)
 
-	err = ErrorServiceUnavailable("service unavailable")
-	require.True(t, IsServiceUnavailable(err))
-	t.Log(err)
+	erk = ErrorServiceUnavailable("service unavailable")
+	require.True(t, IsServiceUnavailable(erk))
+	t.Log(erk)
 }
 
 func TestEnumIsolation(t *testing.T) {
 	// Test isolation between enums
-	topErr := ErrorUnknown("top level error")
-	nestedErr := ErrorGetInfoRespUserNotFound("nested error")
+	topErk := ErrorUnknown("top level error")
+	nestedErk := ErrorGetInfoRespUserNotFound("nested error")
 
-	require.False(t, IsGetInfoRespUserNotFound(topErr))
-	require.False(t, IsUnknown(nestedErr))
+	require.False(t, IsGetInfoRespUserNotFound(topErk))
+	require.False(t, IsUnknown(nestedErk))
 }
